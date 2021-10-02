@@ -19,11 +19,21 @@ tabla = soup.find('table', attrs={'id': 'cotizaciones'})
 # tabla = soup.find('tr', attrs={'td': ''})
 # print(tabla.find_all('b'))
 nombre = tabla.select('b')
-print(nombre[1].text)
+# print((nombre[1].text).replace('\S', ''))
 
 
 # print(tabla.select('Maximo'))
 maximoPorAccion = soup.find_all('td', attrs={'data-field': 'Maximo'})
 
+maxAcci = []
+maxAcciFloat = []
+nameAcci = []
 for i in  range(0, len(maximoPorAccion)):
-    print(float(maximoPorAccion[i].text))
+    maxAcci.append((((((maximoPorAccion[i].text).replace('\n', '')).replace('\r', '')).replace(' ', '')).replace(".", "")).replace(",","."))
+    maxAcciFloat.append(float(maxAcci[i]))
+    nameAcci.append((((nombre[i].text).replace('\n', '')).replace('\r', '')).replace(' ', ''))
+
+ind = maxAcciFloat.index(max(maxAcciFloat))
+print(max(maxAcciFloat))
+print(nameAcci[ind])
+
