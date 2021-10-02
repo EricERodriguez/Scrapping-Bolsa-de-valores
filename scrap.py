@@ -18,4 +18,12 @@ soup = BeautifulSoup(page, "lxml")
 tabla = soup.find('table', attrs={'id': 'cotizaciones'})
 # tabla = soup.find('tr', attrs={'td': ''})
 # print(tabla.find_all('b'))
-print(tabla.select('b'))
+nombre = tabla.select('b')
+print(nombre[1].text)
+
+
+# print(tabla.select('Maximo'))
+maximoPorAccion = soup.find_all('td', attrs={'data-field': 'Maximo'})
+
+for i in  range(0, len(maximoPorAccion)):
+    print(float(maximoPorAccion[i].text))
